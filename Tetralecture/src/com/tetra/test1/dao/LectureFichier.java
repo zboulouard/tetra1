@@ -18,8 +18,18 @@ double startTime = System.currentTimeMillis();
  
 			br = new BufferedReader(new FileReader("src/com/tetra/test1/source/A-A.1"));
  
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
+//			while ((sCurrentLine = br.readLine()) != null) {
+//				System.out.println(sCurrentLine);
+//			}
+			
+			sCurrentLine = br.readLine();
+			
+			System.out.println(sCurrentLine);
+			
+			String[] split = sCurrentLine.split(" ");
+			
+			for(String ss : split) {
+				System.out.println(ss);
 			}
  
 		} catch (IOException e) {
