@@ -15,6 +15,8 @@ public class LectureFichier {
 		BufferedReader br = null;
 		
 		List<String> listeAuteurs = new ArrayList<String>();
+		
+		List<String[]> matrice = new ArrayList<String[]>();
 		 
 		try {
  
@@ -33,15 +35,14 @@ public class LectureFichier {
 				listeAuteurs.add(auteur);
 			}
 			
-			System.out.println("*******************Colonnes*******************");
+			System.out.println("Nombre d'auteurs : " + listeAuteurs.size());
 			
 			while ((sCurrentLine = br.readLine()) != null) {
 				String[] colonnes = sCurrentLine.split(" ");
 				for(int i=1; i<colonnes.length; i++) {
-					String contenu = colonnes[i] + " ";
-					System.out.print(contenu);
+					colonnes[i] = colonnes[i] + " ";
 				}
-				System.out.println();
+				matrice.add(colonnes);
 			}
  
 		} catch (IOException e) {
@@ -54,11 +55,34 @@ public class LectureFichier {
 			}
 		}
 		
+		System.out.println("*******************Matrice Integer*******************");
+		
+		List<Integer[]> matriceInt = new ArrayList<Integer[]>();
+		
+		for(int i=0; i<matrice.size(); i++) {
+			String[] v = matrice.get(i);
+			Integer[] vInt = new Integer[v.length]; 
+			for(int j=1; j<vInt.length; j++) {
+				vInt[j] = Integer.parseInt(v[j].trim());
+			}
+			matriceInt.add(vInt);
+		}
+		
+		for(int i=0; i<matriceInt.size(); i++) {
+			Integer[] vi = matriceInt.get(i);
+			for(int j=1; j<vi.length; j++) {
+				System.out.print(vi[j]);
+			}
+			System.out.println();
+		}
+		
+		System.out.println("Taille Matrice Integer : " + matriceInt.size());
+		
 		double endTime = System.currentTimeMillis();
 		
 		double executionTime = (endTime - startTime) / 1000;
 		
-		System.out.println(executionTime);
+		System.out.println( "Temps d'exécution : " + executionTime);
 		
 	}
 
