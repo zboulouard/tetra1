@@ -8,13 +8,27 @@ import java.util.List;
 
 public class LectureFichier {
 	
+	List<String> listeAuteurs = new ArrayList<String>();
+	
+	List<Integer[]> matriceInt = new ArrayList<Integer[]>();
+	
+	public List<String> getListeAuteurs() {
+		return listeAuteurs;
+	}
+
+	public List<Integer[]> getMatriceInt() {
+		return matriceInt;
+	}
+
+
+
 	public void lireFichier() {
 		
 		double startTime = System.currentTimeMillis();
 		
 		BufferedReader br = null;
 		
-		List<String> listeAuteurs = new ArrayList<String>();
+//		List<String> listeAuteurs = new ArrayList<String>();
 		
 		List<String[]> matrice = new ArrayList<String[]>();
 		 
@@ -57,7 +71,7 @@ public class LectureFichier {
 		
 		System.out.println("*******************Matrice Integer*******************");
 		
-		List<Integer[]> matriceInt = new ArrayList<Integer[]>();
+//		List<Integer[]> matriceInt = new ArrayList<Integer[]>();
 		
 		for(int i=0; i<matrice.size(); i++) {
 			String[] v = matrice.get(i);

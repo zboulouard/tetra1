@@ -1,14 +1,16 @@
 package com.tetra.test1;
 
-import com.tetra.test1.dao.LectureFichier;
+import com.tetra.test1.business.TetraTraitement;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		LectureFichier lectureFichier = new LectureFichier();
+//		LectureFichier lectureFichier = new LectureFichier();
+//		
+//		lectureFichier.lireFichier();
 		
-		lectureFichier.lireFichier();
+		TetraTraitement tetraTraitement = new TetraTraitement();
 
 	}
 
