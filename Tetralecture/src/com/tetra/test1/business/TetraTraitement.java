@@ -34,25 +34,5 @@ public class TetraTraitement {
 		}
 		
 	}
-	
-//	public void filtreMatrice(List<String> auteurs, List<Integer[]> matrice) {
-//		
-//		for(int i=0; i<matrice.size(); i++) {
-//			Integer[] vect = matrice.get(i);
-//			for(int j=1; j<vect.length; j++) {
-//				if(vect[j] == 0) {
-//					continue;
-//				}
-//				if(j==i) {
-//					continue;
-//				} else {
-//					System.out.println(auteurs.get(i) + " et " + auteurs.get(j) + " ont collaboré " + vect[j] + " fois.");
-//				}
-//			}
-//		}
-//		
-//	}
-	
-	
 
 }
