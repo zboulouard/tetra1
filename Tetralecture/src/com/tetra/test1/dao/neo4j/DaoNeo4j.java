@@ -18,42 +18,31 @@ import com.tetra.test1.dao.neo4j.nodeLabels.NodeLabels;
 import com.tetra.test1.dao.neo4j.typesRelations.TypeRelation;
 
 public class DaoNeo4j {
-	
+
+	private static final String DB_PATH = "C:\\Zakaria\\NeoTests\\Tetralecture";
 	GraphDatabaseFactory dbFactory = new GraphDatabaseFactory();
-	GraphDatabaseService db = dbFactory.newEmbeddedDatabase("C:\\Zakaria\\NeoTests\\Tetralecture");
+	GraphDatabaseService db = dbFactory.newEmbeddedDatabase(DB_PATH);
 
 	public DaoNeo4j() {
-		
 		LectureFichier lectureFichier = new LectureFichier();
 		lectureFichier.lireFichier();
 		createNodes(lectureFichier.getListeAuteurs());
 		createLinks(lectureFichier.getListeAuteurs(), lectureFichier.getMatriceInt());
-		
 	}
-	
+
 	private void createNodes(List<String> nomsNoeuds) {
-		
-//		GraphDatabaseFactory dbFactory = new GraphDatabaseFactory();
-//		GraphDatabaseService db = dbFactory.newEmbeddedDatabase("C:\\Zakaria\\NeoTests\\Tetralecture");
-		
 		for(int i=0; i<nomsNoeuds.size(); i++) {
-			
 			try (Transaction tx = db.beginTx()) {
 				Node noeud = db.createNode(NodeLabels.AUTEUR);
 				noeud.setProperty("Nom_Court", nomsNoeuds.get(i));
 				tx.success();
 			}
-			
+
 		}
-		
 	}
-	
+
 	private void createLinks(List<String> auteurs, List<Integer[]> matriceInt) {
-		
-//		GraphDatabaseFactory dbFactory = new GraphDatabaseFactory();
-//		GraphDatabaseService db = dbFactory.newEmbeddedDatabase("C:\\Zakaria\\NeoTests\\Tetralecture");
 		ExecutionEngine execEngine = new ExecutionEngine(db);
-		
 		for(int i=0; i<matriceInt.size(); i++) {
 			Integer[] vect = matriceInt.get(i);
 			for(int j=0; j<vect.length-1; j++) {
@@ -62,23 +51,11 @@ public class DaoNeo4j {
 				}
 				if(vect[j]==null || vect[j]==0) {
 					continue;
-				} 
+				}
 				else {
-					//System.out.println("Auteur : " + auteurs.get(i) + " et auteur : " + auteurs.get(j) + " ont collaboré " + vect[j] + " fois.");
 					try (Transaction tx = db.beginTx()) {
 						String query = "MATCH (auteur1:AUTEUR{Nom_Court:'" + auteurs.get(i) + "'}), (auteur2:AUTEUR{Nom_Court:'" + auteurs.get(j) + "'}) return auteur1, auteur2";
 						ExecutionResult result = execEngine.execute(query);
-//						Iterator<Node> aut_column = result.columnAs("auteur2");
-//						for(Node node : IteratorUtil.asIterable(aut_column)) {
-//							String nodeResult = node + " : " + node.getProperty("Nom_Court");
-//							System.out.println(nodeResult);
-//						}
-//						for ( Map<String, Object> row : result ) {
-//						    for ( Entry<String, Object> column : row.entrySet() ) {
-//						    	String nodeResult = column.getKey() + " : " + column.getValue();
-//						    	System.out.println(nodeResult);
-//						    }
-//						}
 						ResourceIterator<Map<String, Object>> rows = result.iterator();
 						for(Map<String,Object> row : IteratorUtil.asIterable(rows)) {
 							Node n1 = (Node) row.get("auteur1");
@@ -91,9 +68,7 @@ public class DaoNeo4j {
 				}
 			}
 		}
-		
 		System.out.println("Succès!");
-		
 	}
-	
+
 }
